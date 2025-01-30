@@ -19,7 +19,7 @@
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
-import definePlugin, { OptionType, ReporterTestable } from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
 
 import { initWs, socket, stopWs } from "./initWs";
 console.log("imported");
@@ -50,7 +50,6 @@ export default definePlugin({
     name: "UserDevCompanion",
     description: "Dev Companion Plugin",
     authors: [Devs.Ven, Devs.sadan, Devs.Samwich],
-    reporterTestable: ReporterTestable.None,
     settings,
 
     toolboxActions: {
@@ -63,8 +62,12 @@ export default definePlugin({
     start() {
         // if we're running the reporter, we need to initws in the reporter file to avoid a race condition
         if (!IS_DEV) throw new Error("This plugin requires dev mode to run, please build with pnpm build --dev");
-        if (Vencord.Settings.plugins.DevCompanion?.enabled) throw new Error("Disable DevCompanion");
+        if (Vencord.Settings.plugins.DevCompanion?.enabled && !IS_REPORTER) throw new Error("Disable DevCompanion");
         initWs();
+        window.reconnectDevtools = () => {
+            socket?.close(1000, "Reconnecting");
+            initWs(true);
+        };
     },
 
     stop: stopWs,
