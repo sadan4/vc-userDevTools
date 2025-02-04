@@ -202,7 +202,7 @@ export function initWs(isManual = false) {
                                     type: "extract",
                                     ok: true,
                                     data: {
-                                        module: extractModule(m.idOrSearch),
+                                        module: extractModule(m.idOrSearch, m.usePatched ?? undefined),
                                         moduleNumber: m.idOrSearch,
                                     },
                                 });
@@ -220,7 +220,7 @@ export function initWs(isManual = false) {
                                 type: "extract",
                                 ok: true,
                                 data: {
-                                    module: extractModule(moduleId),
+                                    module: extractModule(moduleId, m.usePatched ?? undefined),
                                     moduleNumber: moduleId
                                 },
                             });
