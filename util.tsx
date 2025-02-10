@@ -9,10 +9,12 @@ import { Settings } from "@api/Settings";
 import { canonicalizeMatch } from "@utils/patches";
 import { CodeFilter, stringMatches, wreq } from "@webpack";
 import { Toasts } from "@webpack/common";
+import { WebpackPatcher } from "Vencord";
 
-import { settings as companionSettings, logger } from ".";
+import { logger, settings as companionSettings } from ".";
 import { FindNode } from "./types/recieve";
-import { getFactoryPatchedBy, getFactoryPatchedSource } from "webpack/patchWebpack";
+
+const { getFactoryPatchedBy, getFactoryPatchedSource } = WebpackPatcher;
 
 /**
  * extracts the patched module, if there is no patched module, throws an error
