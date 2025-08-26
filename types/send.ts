@@ -5,7 +5,7 @@
  */
 
 // should be the same types as src/server/types/recieve.ts in the companion
-export type OutgoingMessage = Base<Report | DiffModule | ExtractModule | ModuleList | RawId | I18nValue | VersionResponse>;
+export type OutgoingMessage = Base<DiffModule | ExtractModule | ModuleList | RawId | I18nValue | VersionResponse>;
 export type FullOutgoingMessage = OutgoingMessage & Nonce;
 
 export type Base<T> = ({
