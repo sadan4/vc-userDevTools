@@ -21,10 +21,11 @@ import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 
-import { initWs, socket, stopWs } from "./initWs";
+import { initWs, socket, stopWs } from "./ws";
 console.log("imported");
 export const PORT = 8485;
 const NAV_ID = "dev-companion-reconnect";
+export const CLIENT_VERSION: readonly [major: number, minor: number, patch: number] = [0, 1, 0];
 
 export const logger = new Logger("DevCompanion");
 
@@ -45,7 +46,17 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN
     }
 });
-
+function makeVesktopSwitcher(branch: string): () => void {
+    return function () {
+        if (!IS_VESKTOP) throw new Error("This function only works on vesktop");
+        if (Vesktop.Settings.store.discordBranch === branch) throw new Error(`Already on ${branch}`);
+        Vesktop.Settings.store.discordBranch = branch;
+        VesktopNative.app.relaunch();
+    };
+}
+window.stable = makeVesktopSwitcher("stable");
+window.canary = makeVesktopSwitcher("canary");
+window.ptb = makeVesktopSwitcher("ptb");
 export default definePlugin({
     name: "UserDevCompanion",
     description: "Dev Companion Plugin",

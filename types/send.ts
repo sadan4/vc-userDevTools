@@ -5,19 +5,17 @@
  */
 
 // should be the same types as src/server/types/recieve.ts in the companion
-import { ReporterData as IReporterData } from "debug/reporterData";
-export type ReporterData = IReporterData;
-
-export type OutgoingMessage = (Report | DiffModule | ExtractModule | ModuleList | RawId | I18nValue) & Base;
+export type OutgoingMessage = Base<Report | DiffModule | ExtractModule | ModuleList | RawId | I18nValue | VersionResponse>;
 export type FullOutgoingMessage = OutgoingMessage & Nonce;
 
-export type Base = {
+export type Base<T> = ({
     ok: true;
-} | {
+} & T) | ({
     ok: false;
-    data?: any;
+    data: null;
     error: string;
-};
+} & Omit<T, "data">);
+
 export type Nonce = {
     nonce: number;
 };
@@ -39,11 +37,6 @@ export type I18nValue = {
     data: {
         value: string;
     };
-};
-
-export type Report = {
-    type: "report";
-    data: ReporterData;
 };
 
 export type DiffModule = {
@@ -80,5 +73,12 @@ export type RawId = {
      */
     type: "rawId";
     data: string;
+};
+
+export type VersionResponse = {
+    type: "version";
+    data: {
+        clientVersion: readonly [number, number, number];
+    };
 };
 // #endregion
