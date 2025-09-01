@@ -1,8 +1,5 @@
 # UserDevTools
 
-# DOES NOT SUPPORT THE REPORTER
-
-# THIS IS FOR DEVS ONLY, YOU WILL NOT GET ANY USE OUT OF THIS IF YOU ARE NOT A DEV
 
 UserDevTools userplugin for Vencord 🚀
 
@@ -15,7 +12,7 @@ However, if you have basic reading abilities, read https://docs.vencord.dev/inst
 
 ## Contribute
 
-you don't :trolley:
+Please submit feature requests/issues to https://github.com/sadan4/VencordCompanion
 
 # Dev Companion
 
