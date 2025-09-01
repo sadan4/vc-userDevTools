@@ -10,6 +10,8 @@ UserDevTools userplugin for Vencord 🚀
 
 However, if you have basic reading abilities, read https://docs.vencord.dev/installing/custom-plugins/.
 
+**Requires this vscode extension to be of any use https://github.com/sadan4/VencordCompanion**
+
 ## Contribute
 
 Please submit feature requests/issues to https://github.com/sadan4/VencordCompanion
