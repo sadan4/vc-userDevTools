@@ -391,7 +391,6 @@ export function initWs(isManual = false) {
                         closed = true;
                         popNotice();
                     };
-                    // @ts-expect-error it accepts react components
                     showNotice(<AllModulesNoti done={promise} close={close} />, "OK", () => {
                         closed = true;
                         popNotice();

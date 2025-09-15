@@ -22,7 +22,6 @@ import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 
 import { initWs, socket, stopWs } from "./ws";
-console.log("imported");
 export const PORT = 8485;
 const NAV_ID = "dev-companion-reconnect";
 export const CLIENT_VERSION: readonly [major: number, minor: number, patch: number] = [0, 1, 1];
