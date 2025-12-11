@@ -45,17 +45,7 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN
     }
 });
-function makeVesktopSwitcher(branch: string): () => void {
-    return function () {
-        if (!IS_VESKTOP) throw new Error("This function only works on vesktop");
-        if (Vesktop.Settings.store.discordBranch === branch) throw new Error(`Already on ${branch}`);
-        Vesktop.Settings.store.discordBranch = branch;
-        VesktopNative.app.relaunch();
-    };
-}
-window.stable = makeVesktopSwitcher("stable");
-window.canary = makeVesktopSwitcher("canary");
-window.ptb = makeVesktopSwitcher("ptb");
+
 export default definePlugin({
     name: "UserDevCompanion",
     description: "Dev Companion Plugin",
