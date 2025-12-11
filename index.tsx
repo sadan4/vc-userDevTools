@@ -49,11 +49,11 @@ export const settings = definePluginSettings({
 export default definePlugin({
     name: "UserDevCompanion",
     description: "Dev Companion Plugin",
-    authors: [Devs.Ven, Devs.sadan, Devs.Samwich],
+    authors: [Devs.Ven, Devs.sadan],
     settings,
 
     toolboxActions: {
-        "Reconnect"() {
+        Reconnect() {
             socket?.close(1000, "Reconnecting");
             initWs(true);
         }
