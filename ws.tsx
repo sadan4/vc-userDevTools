@@ -246,6 +246,9 @@ export function initWs(isManual = false) {
                                     case "Component":
                                         results = findAll(parsedArgs[0]);
                                         break;
+                                    case "CssClasses":
+                                        results = findAll(filters.byClassNames(...parsedArgs), { topLevelOnly: true });
+                                        break;
                                     case "ByProps":
                                         results = findAll(filters.byProps(...parsedArgs));
                                         break;
@@ -356,6 +359,9 @@ export function initWs(isManual = false) {
                             break;
                         case "ByProps":
                             results = findAll(filters.byProps(...parsedArgs));
+                            break;
+                        case "CssClasses":
+                            results = findAll(filters.byClassNames(...parsedArgs), { topLevelOnly: true });
                             break;
                         case "Store":
                             results = findAll(filters.byStoreName(parsedArgs[0]));
