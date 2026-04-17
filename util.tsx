@@ -6,10 +6,10 @@
 
 import { showNotice } from "@api/Notices";
 import { Settings } from "@api/Settings";
+import { WebpackPatcher } from "@utils/../Vencord"; // weird path so we're not relative to our location
 import { canonicalizeMatch } from "@utils/patches";
 import { CodeFilter, stringMatches, wreq } from "@webpack";
 import { Toasts } from "@webpack/common";
-import { WebpackPatcher } from "Vencord";
 
 import { logger, settings as companionSettings } from ".";
 import { FindNode } from "./types/recieve";
