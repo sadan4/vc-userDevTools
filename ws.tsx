@@ -11,7 +11,7 @@ import { loadLazyChunks } from "@debug/loadLazyChunks";
 import { getIntlMessageFromHash } from "@utils/discord";
 import { canonicalizeMatch, canonicalizeReplace } from "@utils/patches";
 import { filters, findAll, search, wreq } from "@webpack";
-import { React, Toasts, useState } from "@webpack/common";
+import { React, showToast, useState } from "@webpack/common";
 
 import { CLIENT_VERSION, logger, PORT, settings } from ".";
 import { Recieve } from "./types";
@@ -50,13 +50,10 @@ export function initWs(isManual = false) {
 
         try {
             if (settings.store.notifyOnAutoConnect || isManual) {
-                Toasts.show({
-                    message: "Connected to WebSocket",
-                    id: Toasts.genId(),
-                    type: Toasts.Type.SUCCESS,
-                    options: {
-                        position: Toasts.Position.TOP
-                    }
+                showToast({
+                    text: "Connected to WebSocket",
+                    variant: "success",
+                    position: "top",
                 });
             }
         }
@@ -72,13 +69,10 @@ export function initWs(isManual = false) {
 
         logger.error("Dev Companion Error:", e);
 
-        Toasts.show({
-            message: "Dev Companion Error",
-            id: Toasts.genId(),
-            type: Toasts.Type.FAILURE,
-            options: {
-                position: Toasts.Position.TOP
-            }
+        showToast({
+            text: "Dev Companion Error",
+            variant: "critical",
+            position: "top"
         });
     });
 
@@ -87,13 +81,10 @@ export function initWs(isManual = false) {
 
         logger.info("Dev Companion Disconnected:", e.code, e.reason);
 
-        Toasts.show({
-            message: "Dev Companion Disconnected",
-            id: Toasts.genId(),
-            type: Toasts.Type.FAILURE,
-            options: {
-                position: Toasts.Position.TOP
-            }
+        showToast({
+            text: "Dev Companion Disconnected",
+            variant: "critical",
+            position: "top",
         });
     });
 

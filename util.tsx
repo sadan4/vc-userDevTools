@@ -10,7 +10,7 @@ import { WebpackPatcher } from "@utils/../Vencord"; // weird path so we're not r
 import { canonicalizeMatch } from "@utils/patches";
 import { Module } from "@vencord/discord-types/webpack";
 import { CodeFilter, FilterFn, stringMatches, wreq } from "@webpack";
-import { Toasts } from "@webpack/common";
+import { showToast } from "@webpack/common";
 
 import { logger, settings as companionSettings } from ".";
 import { FindNode } from "./types/recieve";
@@ -105,13 +105,10 @@ export function mkRegexFind(idOrSearch: string): RegExp[] {
 }
 // the next two functions are copied from components/pluginSettings
 function showErrorToast(message: string) {
-    Toasts.show({
-        message,
-        type: Toasts.Type.FAILURE,
-        id: Toasts.genId(),
-        options: {
-            position: Toasts.Position.BOTTOM
-        }
+    showToast({
+        text: message,
+        position: "bottom",
+        variant: "critical",
     });
 }
 
@@ -126,14 +123,10 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
                 beforeReload();
                 window.location.reload();
             }
-            Toasts.show({
-                id: Toasts.genId(),
-                message: "Reload Needed",
-                type: Toasts.Type.MESSAGE,
-                options: {
-                    duration: 5000,
-                    position: Toasts.Position.TOP
-                }
+            showToast({
+                text: "Reload Needed",
+                variant: "default",
+                position: "top",
             });
         }
     }
